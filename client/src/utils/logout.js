@@ -1,8 +1,8 @@
 const logout = event => {
   event.preventDefault();
   localStorage.removeItem("jwtToken");
-  localStorage.removeItem("beeZUser");
-  this.props.history.push("/login");
+  localStorage.removeItem("appUser");
+  this.props.history.push("/");
 };
 
 export default logout;

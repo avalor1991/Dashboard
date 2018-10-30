@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../css/register.css";
 import API from "../utils/API";
+import imagine from "../assets/img/back.jpg";
+
 import {
   Col,
   Button,
@@ -9,9 +11,8 @@ import {
   ControlLabel
 } from "react-bootstrap";
 
-const sectionStyle = {
-  height: "100vh",
-  backgroundColor: "blue"
+const sidebarBackground = {
+  backgroundImage: "url(" + imagine + ")"
 };
 
 class Register extends Component {
@@ -39,7 +40,7 @@ class Register extends Component {
           API.loginSubmit({ username, password })
             .then(result => {
               localStorage.setItem("jwtToken", result.data.token);
-              localStorage.setItem("beeZUser", this.state.username);
+              localStorage.setItem("appUser", this.state.username);
               this.setState({ message: "" });
 
               this.props.history.push("/home");
@@ -62,7 +63,9 @@ class Register extends Component {
     return (
       <div className="Register">
         {/* <Row className="show-grid"> */}
-        <Col md={6} style={sectionStyle} />
+        <Col md={6}>
+          <div className="background" style={sidebarBackground} />
+        </Col>
         <Col md={6}>
           <form id="signup" onSubmit={this.onSubmit}>
             {message !== "" && (

@@ -1,21 +1,36 @@
 import React, { Component } from "react";
-import {
-  Grid,
-  Row,
-  Col,
-  FormGroup,
-  ControlLabel,
-  FormControl
-} from "react-bootstrap";
+import { Grid, Row, Col } from "react-bootstrap";
 
-import { Card } from "components/Card/Card.jsx";
-import { FormInputs } from "components/FormInputs/FormInputs.jsx";
-import { UserCard } from "components/UserCard/UserCard.jsx";
-import Button from "components/CustomButton/CustomButton.jsx";
-
-import avatar from "assets/img/faces/face-3.jpg";
+import { Card } from "../../components/Card/Card.jsx";
+import { FormInputs } from "../../components/FormInputs/FormInputs.jsx";
+import Button from "../../components/CustomButton/CustomButton.jsx";
+import API from "../../utils/API.js";
 
 class UserProfile extends Component {
+  state = {
+    firstName: [],
+    lastName: [],
+    email: [],
+    userName: []
+  };
+
+  componentDidMount() {
+    this.userData();
+  }
+
+  userData = () => {
+    API.getUser()
+      .then(res =>
+        this.setState({
+          firstName: res.data[0].firstname,
+          lastName: res.data[0].lastname,
+          userName: res.data[0].username,
+          email: res.data[0].username
+        })
+      )
+
+      .catch(err => console.log(err));
+  };
   render() {
     return (
       <div className="content">
@@ -27,28 +42,29 @@ class UserProfile extends Component {
                 content={
                   <form>
                     <FormInputs
-                      ncols={["col-md-5", "col-md-3", "col-md-4"]}
+                      ncols={["col-md-5", "col-md-5"]}
                       proprieties={[
-                        {
-                          label: "Company (disabled)",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Company",
-                          defaultValue: "Creative Code Inc.",
-                          disabled: true
-                        },
+                        // {
+                        //   label: "Company (disabled) ",
+                        //   type: "text",
+                        //   bsClass: "form-control",
+                        //   placeholder: "Company",
+                        //   defaultValue: "Vision",
+                        //   disabled: true
+                        // },
                         {
                           label: "Username",
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Username",
-                          defaultValue: "michael23"
+                          defaultValue: this.state.userName
                         },
                         {
                           label: "Email address",
                           type: "email",
                           bsClass: "form-control",
-                          placeholder: "Email"
+                          placeholder: "Email",
+                          defaultValue: this.state.email
                         }
                       ]}
                     />
@@ -60,14 +76,14 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "First name",
-                          defaultValue: "Mike"
+                          defaultValue: this.state.firstName
                         },
                         {
                           label: "Last name",
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Last name",
-                          defaultValue: "Andrew"
+                          defaultValue: this.state.lastName
                         }
                       ]}
                     />
@@ -79,8 +95,7 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Home Adress",
-                          defaultValue:
-                            "Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                          defaultValue: ""
                         }
                       ]}
                     />
@@ -92,38 +107,23 @@ class UserProfile extends Component {
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "City",
-                          defaultValue: "Mike"
+                          defaultValue: ""
                         },
                         {
                           label: "Country",
                           type: "text",
                           bsClass: "form-control",
                           placeholder: "Country",
-                          defaultValue: "Andrew"
+                          defaultValue: ""
                         },
                         {
                           label: "Postal Code",
                           type: "number",
                           bsClass: "form-control",
-                          placeholder: "ZIP Code"
+                          placeholder: ""
                         }
                       ]}
                     />
-
-                    <Row>
-                      <Col md={12}>
-                        <FormGroup controlId="formControlsTextarea">
-                          <ControlLabel>About Me</ControlLabel>
-                          <FormControl
-                            rows="5"
-                            componentClass="textarea"
-                            bsClass="form-control"
-                            placeholder="Here can be your description"
-                            defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
                     <Button bsStyle="info" pullRight fill type="submit">
                       Update Profile
                     </Button>
@@ -132,38 +132,9 @@ class UserProfile extends Component {
                 }
               />
             </Col>
-            <Col md={4}>
-              <UserCard
-                bgImage="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400"
-                avatar={avatar}
-                name="Mike Andrew"
-                userName="michael24"
-                description={
-                  <span>
-                    "Lamborghini Mercy
-                    <br />
-                    Your chick she so thirsty
-                    <br />
-                    I'm in that two seat Lambo"
-                  </span>
-                }
-                socials={
-                  <div>
-                    <Button simple>
-                      <i className="fa fa-facebook-square" />
-                    </Button>
-                    <Button simple>
-                      <i className="fa fa-twitter" />
-                    </Button>
-                    <Button simple>
-                      <i className="fa fa-google-plus-square" />
-                    </Button>
-                  </div>
-                }
-              />
-            </Col>
+            <Col md={4} />
           </Row>
-        </Grid>>
+        </Grid>
       </div>
     );
   }

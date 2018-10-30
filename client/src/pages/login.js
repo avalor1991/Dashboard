@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "../css/login.css";
 import API from "../utils/API";
-// import imagine from "../assets/img/sidebar-3.jpg";
+import imagine from "../assets/img/back.jpg";
+
 import {
   Form,
   Col,
@@ -11,11 +12,10 @@ import {
   ControlLabel,
   ButtonToolbar
 } from "react-bootstrap";
-// import Image from "../images/bee-on-flower
 
-const sectionStyle = {
-  height: "100vh",
-  backgroundColor: "blue"
+const sidebarBackground = {
+  backgroundImage: "url(" + imagine + ")",
+  color: "white"
 };
 class Login extends Component {
   state = {
@@ -36,7 +36,7 @@ class Login extends Component {
     API.loginSubmit({ username, password })
       .then(result => {
         localStorage.setItem("jwtToken", result.data.token);
-        localStorage.setItem("beeZUser", this.state.username);
+        localStorage.setItem("appUser", this.state.username);
         this.setState({ message: "" });
 
         this.props.history.push("/home");
@@ -55,7 +55,12 @@ class Login extends Component {
     return (
       <div className="Login">
         {/* <Row className="show-grid"> */}
-        <Col md={6} style={sectionStyle} />
+        <Col md={6}>
+          <div className="background" style={sidebarBackground}>
+            <h1>Advanced Business Dashboard</h1>
+            <p>Turn your data into insightful digital dashboards in minutes.</p>
+          </div>
+        </Col>
         <Col md={6}>
           <Form id="signup" onSubmit={this.onSubmit}>
             {message !== "" && (

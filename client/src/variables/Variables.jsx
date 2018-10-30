@@ -1,10 +1,7 @@
-//
-// //
-// // // For notifications
-// //
-//
 var defaultWidth =
-  window.screen.width > 768 ? window.screen.width * 1 / 3 : window.screen.width;
+  window.screen.width > 768
+    ? (window.screen.width * 1) / 3
+    : window.screen.width;
 
 var style = {
   Wrapper: {},
@@ -474,12 +471,12 @@ const iconsArray = [
 //
 // Data for Pie Chart
 var dataPie = {
-  labels: ["40%", "20%", "40%"],
-  series: [40, 20, 40]
+  labels: ["40%"],
+  series: [40, 60]
 };
 var legendPie = {
-  names: ["Open", "Bounce", "Unsubscribe"],
-  types: ["info", "danger", "warning"]
+  names: ["Satisfaction "],
+  types: ["info"]
 };
 
 // Data for Line Chart
@@ -540,7 +537,7 @@ var dataBar = {
     "Feb",
     "Mar",
     "Apr",
-    "Mai",
+    "May",
     "Jun",
     "Jul",
     "Aug",
@@ -549,10 +546,7 @@ var dataBar = {
     "Nov",
     "Dec"
   ],
-  series: [
-    [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-    [412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636, 695]
-  ]
+  series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 1895]]
 };
 var optionsBar = {
   seriesBarDistance: 10,
@@ -575,8 +569,8 @@ var responsiveBar = [
   ]
 ];
 var legendBar = {
-  names: ["Tesla Model S", "BMW 5 Series"],
-  types: ["info", "danger"]
+  names: [],
+  types: ["info"]
 };
 
 module.exports = {

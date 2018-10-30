@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -8,7 +9,7 @@ const bluebird = require("bluebird");
 
 // Configure body parser for AJAX requests
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: "50mb"}));
 // Serve up static assets
 app.use(express.static("client/build"));
 // Add routes, both API and view

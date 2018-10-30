@@ -1,28 +1,21 @@
 import React, { Component } from "react";
-import Main from "../components/Main";
-import { Row, Col, Card } from "react-materialize";
-import Navigation from "../components/Navbar";
+import { Row, Panel } from "react-bootstrap";
 
 class NoMatch extends Component {
-  logout = event => {
-    event.preventDefault();
-    localStorage.removeItem("jwtToken");
-    localStorage.removeItem("beeZUser");
-    this.props.history.push("/login");
-  };
+  // logout = event => {
+  //   event.preventDefault();
+  //   localStorage.removeItem("jwtToken");
+  //   localStorage.removeItem("appUser");
+  //   this.props.history.push("/");
+  // };
 
   render() {
     return (
-      <Main className="noMatch">
-        <Navigation logout={this.logout} />
-        <Row>
-          <Col s={12}>
-            <Card className="orange-text white center-align">
-              <h1 className="center">Ouch! This page doesn't exist.</h1>
-            </Card>
-          </Col>
-        </Row>
-      </Main>
+      <Row>
+        <Panel className="orange-text white center-align">
+          <h1 className="center">Ouch! This page doesn't exist.</h1>
+        </Panel>
+      </Row>
     );
   }
 }
